@@ -1,0 +1,41 @@
+<main class="ventana">
+    <header class="publicidad">
+        <h1>{{publicidad}}</h1>
+    </header>
+
+    <p class="usuario">USERNAME: <strong>{{username}}</strong></p>
+
+    <form class="formulario" action="/mensajes" method="POST">
+        <label for="mensaje">MENSAJE:</label>
+        <input
+            type="text"
+            id="mensaje"
+            name="mensaje"
+            placeholder="{{placeholder}}"
+            value="{{cajaTexto}}"
+            maxlength="500"
+            required
+            {{#if error}}aria-invalid="true" aria-describedby="error-mensaje"{{/if}}
+        >
+        <button type="submit">ENVIAR</button>
+    </form>
+
+    {{#if error}}
+        <p class="error" id="error-mensaje" role="alert">{{error}}</p>
+    {{/if}}
+
+    <section class="caja-mensajes" aria-label="Caja de mensajes" tabindex="0">
+        {{#if cajaMensajes.length}}
+            <ul class="mensajes">
+                {{#each cajaMensajes}}
+                    <li class="mensaje">
+                        <strong class="mensaje-usuario">{{this.username}}</strong>
+                        <p>{{this.texto}}</p>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <p class="sin-mensajes">Los mensajes que envíes aparecerán aquí.</p>
+        {{/if}}
+    </section>
+</main>
